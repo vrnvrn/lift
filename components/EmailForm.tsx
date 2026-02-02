@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { exercises, WorkoutData } from "@/lib/exercises";
 
 interface EmailFormProps {
@@ -50,23 +51,51 @@ function formatWorkoutEmail(workoutData: WorkoutData): string {
   });
 
   body += `${"=".repeat(40)}\n`;
-  body += `Keep pushing! 💪\n`;
+  body += `Keep pushing!\n`;
 
   return body;
 }
 
 export default function EmailForm({ workoutData, email, onEmailChange }: EmailFormProps) {
-  const handleSendEmail = () => {
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSendEmail = async () => {
+    setSending(true);
+    setStatus("idle");
+    setErrorMessage("");
+
     const subject = `Lifting Fundamentals - ${new Date().toLocaleDateString()}`;
     const body = formatWorkoutEmail(workoutData);
-    
-    const mailtoLink = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, subject, body }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send email");
+      }
+
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Failed to send email");
+    } finally {
+      setSending(false);
+    }
   };
 
   const hasAnyData = Object.values(workoutData).some(
     (log) => log.weight || log.set1Reps || log.set2Reps || log.amrapReps
   );
+
+  const isValidEmail = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   return (
     <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mt-8">
@@ -74,7 +103,7 @@ export default function EmailForm({ workoutData, email, onEmailChange }: EmailFo
         Email Your Workout
       </h2>
       <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-        Send yourself a copy of today&apos;s workout. This opens your email client with a pre-filled summary.
+        Send yourself a copy of today&apos;s workout summary.
       </p>
       
       <div className="flex flex-col sm:flex-row gap-3">
@@ -87,12 +116,24 @@ export default function EmailForm({ workoutData, email, onEmailChange }: EmailFo
         />
         <button
           onClick={handleSendEmail}
-          disabled={!email || !hasAnyData}
+          disabled={!isValidEmail || !hasAnyData || sending}
           className="px-6 py-3 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          Send to Email
+          {sending ? "Sending..." : "Send to Email"}
         </button>
       </div>
+      
+      {status === "success" && (
+        <p className="text-sm text-green-600 mt-3">
+          ✓ Workout sent to {email}!
+        </p>
+      )}
+      
+      {status === "error" && (
+        <p className="text-sm text-red-600 mt-3">
+          ✗ {errorMessage}
+        </p>
+      )}
       
       {!hasAnyData && (
         <p className="text-xs text-zinc-500 mt-3">
