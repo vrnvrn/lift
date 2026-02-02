@@ -3,7 +3,7 @@ export interface Exercise {
   name: string;
   description: string;
   tips: string;
-  trackDistance?: boolean; // For farmer's walk
+  isFarmersWalk?: boolean; // Special handling for steps format
 }
 
 export const exercises: Exercise[] = [
@@ -34,9 +34,9 @@ export const exercises: Exercise[] = [
   {
     id: "farmers-walk",
     name: "Farmer's Walk",
-    description: "Carry heavy weights in each hand and walk. Track distance or time.",
+    description: "Carry heavy weights in each hand. Walk 20 steps out, 20 steps back per set.",
     tips: "Stand tall, shoulders back, take short quick steps. Rest 2-3 min between sets.",
-    trackDistance: true,
+    isFarmersWalk: true,
   },
   {
     id: "shoulder-press",

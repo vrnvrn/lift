@@ -34,49 +34,49 @@ export default function ExerciseCard({ exercise, log, onChange, index }: Exercis
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
         <div>
           <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
-            {exercise.trackDistance ? "Weight / Distance" : "Weight"}
+            Weight
           </label>
           <input
             type="text"
             value={log.weight}
             onChange={(e) => onChange("weight", e.target.value)}
-            placeholder={exercise.trackDistance ? "50 lbs × 40m" : "25 lbs"}
+            placeholder="20 kg"
             className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         <div>
           <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
-            Set 1
+            {exercise.isFarmersWalk ? "Set 1 (out + back)" : "Set 1"}
           </label>
           <input
             type="text"
             value={log.set1Reps}
             onChange={(e) => onChange("set1Reps", e.target.value)}
-            placeholder="10"
+            placeholder={exercise.isFarmersWalk ? "20 + 20" : "10"}
             className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         <div>
           <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
-            Set 2
+            {exercise.isFarmersWalk ? "Set 2 (out + back)" : "Set 2"}
           </label>
           <input
             type="text"
             value={log.set2Reps}
             onChange={(e) => onChange("set2Reps", e.target.value)}
-            placeholder="10"
+            placeholder={exercise.isFarmersWalk ? "20 + 20" : "10"}
             className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         <div>
           <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
-            AMRAP (Set 3)
+            {exercise.isFarmersWalk ? "Set 3 (out + back)" : "AMRAP (Set 3)"}
           </label>
           <input
             type="text"
             value={log.amrapReps}
             onChange={(e) => onChange("amrapReps", e.target.value)}
-            placeholder="12+"
+            placeholder={exercise.isFarmersWalk ? "20 + 20" : "12+"}
             className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
