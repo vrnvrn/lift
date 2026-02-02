@@ -12,7 +12,7 @@ export default function ProgramInfo() {
           </h3>
           <p className="text-sm">
             The best way to build strength is <strong>progressive overload</strong>: gradually 
-            doing a little more over time — more weight, more reps, or cleaner reps.
+            doing a little more over time. This means more weight, more reps, or cleaner reps.
           </p>
         </div>
 
