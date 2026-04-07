@@ -65,6 +65,10 @@ export interface ExerciseLog {
   // Shoulder press left/right fields
   leftWeight?: string;
   rightWeight?: string;
+  warmupWeightLeft?: string;
+  warmupWeightRight?: string;
+  warmupRepsLeft?: string;
+  warmupRepsRight?: string;
   set1RepsLeft?: string;
   set1RepsRight?: string;
   set2RepsLeft?: string;
@@ -89,6 +93,10 @@ export function createEmptyWorkout(): WorkoutData {
       // Shoulder press left/right fields
       leftWeight: "",
       rightWeight: "",
+      warmupWeightLeft: "",
+      warmupWeightRight: "",
+      warmupRepsLeft: "",
+      warmupRepsRight: "",
       set1RepsLeft: "",
       set1RepsRight: "",
       set2RepsLeft: "",

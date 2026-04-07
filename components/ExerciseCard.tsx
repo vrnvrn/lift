@@ -34,32 +34,82 @@ export default function ExerciseCard({ exercise, log, onChange, index }: Exercis
       </p>
 
       {/* Warmup Section */}
-      <div className="grid grid-cols-2 gap-3 mb-3">
-        <div>
-          <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">
-            Warmup Weight
-          </label>
-          <input
-            type="text"
-            value={log.warmupWeight}
-            onChange={(e) => onChange("warmupWeight", e.target.value)}
-            placeholder="10 kg"
-            className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
+      {exercise.isShoulderPress ? (
+        <div className="mb-3">
+          <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-500 mb-2">Warmup</p>
+          <div className="grid grid-cols-2 gap-3 mb-2">
+            <div>
+              <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">Left Weight</label>
+              <input
+                type="text"
+                value={log.warmupWeightLeft || ""}
+                onChange={(e) => onChange("warmupWeightLeft", e.target.value)}
+                placeholder="5 kg"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">Left Reps</label>
+              <input
+                type="text"
+                value={log.warmupRepsLeft || ""}
+                onChange={(e) => onChange("warmupRepsLeft", e.target.value)}
+                placeholder="8"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">Right Weight</label>
+              <input
+                type="text"
+                value={log.warmupWeightRight || ""}
+                onChange={(e) => onChange("warmupWeightRight", e.target.value)}
+                placeholder="5 kg"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">Right Reps</label>
+              <input
+                type="text"
+                value={log.warmupRepsRight || ""}
+                onChange={(e) => onChange("warmupRepsRight", e.target.value)}
+                placeholder="8"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
         </div>
-        <div>
-          <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">
-            Warmup Reps
-          </label>
-          <input
-            type="text"
-            value={log.warmupReps}
-            onChange={(e) => onChange("warmupReps", e.target.value)}
-            placeholder="8"
-            className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
+      ) : (
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          <div>
+            <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">
+              Warmup Weight
+            </label>
+            <input
+              type="text"
+              value={log.warmupWeight}
+              onChange={(e) => onChange("warmupWeight", e.target.value)}
+              placeholder="10 kg"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-1">
+              Warmup Reps
+            </label>
+            <input
+              type="text"
+              value={log.warmupReps}
+              onChange={(e) => onChange("warmupReps", e.target.value)}
+              placeholder="8"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Shoulder Press - Left/Right fields */}
       {exercise.isShoulderPress ? (
@@ -242,7 +292,7 @@ export default function ExerciseCard({ exercise, log, onChange, index }: Exercis
 
       {advice.message && (
         <p className={`text-sm font-medium mt-3 ${advice.color}`}>
-          → {advice.message}
+          {advice.message}
         </p>
       )}
     </div>
