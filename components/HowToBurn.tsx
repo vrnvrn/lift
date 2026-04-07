@@ -13,10 +13,18 @@ export default function HowToBurn() {
           <div>
             <h3 className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">Eat enough protein</h3>
             <p className="text-sm">
-              Aim for <strong>0.7 to 1g of protein per pound of bodyweight</strong> per day. This is the single most important dietary change you can make. Protein keeps you full, preserves muscle while you lose fat, and helps build new muscle when you train.
+              Aim for <strong>0.7 to 1g of protein per pound of bodyweight</strong> (1.5 to 2.2g per kg) per day. This is the single most important dietary change you can make. Protein keeps you full, preserves muscle while you lose fat, and helps build new muscle when you train.{" "}
+              <a
+                href="https://examine.com/guides/protein-intake/?srsltid=AfmBOopY2wVyO5-qRWe0mpa0wc2e6ce6nD6PK0eaEMSi0PgAddhRX-AZ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+              >
+                Examine guide on protein intake.
+              </a>
             </p>
             <p className="text-sm mt-2 text-zinc-500 dark:text-zinc-400">
-              Example: if you weigh 160 lbs, target 110 to 160g of protein per day.
+              Example: if you weigh 160 lbs (73 kg), target 110 to 160g of protein per day.
             </p>
           </div>
 
