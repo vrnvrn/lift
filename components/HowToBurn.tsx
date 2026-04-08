@@ -283,36 +283,46 @@ export default function HowToBurn() {
               <p className="text-sm">
                 Intense training creates inflammation as a normal part of recovery. That is fine and expected. But chronic low-grade inflammation from diet slows recovery, disrupts hormones, and makes it harder to lose fat. Eating anti-inflammatory foods helps your body resolve inflammation faster so you adapt, repair, and improve.
               </p>
-              <ul className="text-sm mt-3 space-y-2 text-zinc-600 dark:text-zinc-400">
-                <li className="flex items-start gap-2">
-                  <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Fatty fish</span>
-                  <span>(salmon, sardines, mackerel) — high in omega-3s, which directly reduce inflammatory markers</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Berries</span>
-                  <span>(blueberries, strawberries, cherries) — rich in antioxidants that reduce oxidative stress from training</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Leafy greens</span>
-                  <span>(spinach, kale, arugula) — magnesium, folate, and polyphenols that support recovery</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Olive oil</span>
-                  <span>— oleocanthal has an ibuprofen-like anti-inflammatory effect; use it as your primary cooking fat</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Turmeric and ginger</span>
-                  <span>— curcumin and gingerol both reduce muscle soreness and inflammation when consumed consistently</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Nuts and seeds</span>
-                  <span>(walnuts, flaxseed, chia) — plant-based omega-3s and vitamin E</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Whole grains and legumes</span>
-                  <span>— fiber feeds gut bacteria that regulate systemic inflammation</span>
-                </li>
-              </ul>
+              <div className="mt-3 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-zinc-50 dark:bg-zinc-800 text-left">
+                      <th className="px-3 py-2 font-medium text-zinc-700 dark:text-zinc-300 w-2/5">Food</th>
+                      <th className="px-3 py-2 font-medium text-zinc-700 dark:text-zinc-300">Why it helps</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                    <tr>
+                      <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200 align-top">Fatty fish<br /><span className="font-normal text-xs text-zinc-500 dark:text-zinc-400">salmon, sardines, mackerel</span></td>
+                      <td className="px-3 py-2.5 text-zinc-600 dark:text-zinc-400 align-top">High in omega-3s, which directly reduce inflammatory markers</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200 align-top">Berries<br /><span className="font-normal text-xs text-zinc-500 dark:text-zinc-400">blueberries, strawberries, cherries</span></td>
+                      <td className="px-3 py-2.5 text-zinc-600 dark:text-zinc-400 align-top">Rich in antioxidants that reduce oxidative stress from training</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200 align-top">Leafy greens<br /><span className="font-normal text-xs text-zinc-500 dark:text-zinc-400">spinach, kale, arugula</span></td>
+                      <td className="px-3 py-2.5 text-zinc-600 dark:text-zinc-400 align-top">Magnesium, folate, and polyphenols that support recovery</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200 align-top">Olive oil</td>
+                      <td className="px-3 py-2.5 text-zinc-600 dark:text-zinc-400 align-top">Oleocanthal has an ibuprofen-like anti-inflammatory effect. Use as your primary cooking fat</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200 align-top">Turmeric and ginger</td>
+                      <td className="px-3 py-2.5 text-zinc-600 dark:text-zinc-400 align-top">Curcumin and gingerol reduce muscle soreness and inflammation when consumed consistently</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200 align-top">Nuts and seeds<br /><span className="font-normal text-xs text-zinc-500 dark:text-zinc-400">walnuts, flaxseed, chia</span></td>
+                      <td className="px-3 py-2.5 text-zinc-600 dark:text-zinc-400 align-top">Plant-based omega-3s and vitamin E</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200 align-top">Whole grains and legumes</td>
+                      <td className="px-3 py-2.5 text-zinc-600 dark:text-zinc-400 align-top">Fiber feeds gut bacteria that regulate systemic inflammation</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-3">
                 What drives chronic inflammation: ultra-processed foods, seed oils in large amounts, refined sugar, alcohol, and low sleep. Cutting these matters as much as adding the good stuff.
               </p>
