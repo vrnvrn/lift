@@ -23,32 +23,51 @@ function formatWorkoutSummary(workoutData: WorkoutData): string {
 
   exercises.forEach((exercise, index) => {
     const log = workoutData[exercise.id];
-    
-    // Check if there's any data for this exercise
+
     const hasStandardData = log.weight || log.set1Reps || log.set2Reps || log.amrapReps;
     const hasShoulderPressData = exercise.isShoulderPress && (
-      log.leftWeight || log.rightWeight || 
+      log.leftWeight || log.rightWeight ||
       log.set1RepsLeft || log.set1RepsRight ||
       log.set2RepsLeft || log.set2RepsRight ||
       log.amrapRepsLeft || log.amrapRepsRight
     );
     const hasWarmupData = log.warmupWeight || log.warmupReps;
-    const hasData = hasStandardData || hasShoulderPressData || hasWarmupData;
+    const hasShoulderWarmupData = exercise.isShoulderPress && (
+      log.warmupWeightLeft || log.warmupWeightRight ||
+      log.warmupRepsLeft || log.warmupRepsRight
+    );
+    const hasData = hasStandardData || hasShoulderPressData || hasWarmupData || hasShoulderWarmupData;
 
     if (hasData) {
       body += `${index + 1}. ${exercise.name.toUpperCase()}\n`;
-      
-      // Warmup data
-      if (hasWarmupData) {
+
+      // Warmup — shoulder press has separate L/R warmup
+      if (exercise.isShoulderPress) {
+        if (hasShoulderWarmupData) {
+          const hasLeft = log.warmupWeightLeft || log.warmupRepsLeft;
+          const hasRight = log.warmupWeightRight || log.warmupRepsRight;
+          if (hasLeft) {
+            const parts = [];
+            if (log.warmupWeightLeft) parts.push(`Weight: ${log.warmupWeightLeft}`);
+            if (log.warmupRepsLeft) parts.push(`Reps: ${log.warmupRepsLeft}`);
+            body += `   Warmup Left: ${parts.join(", ")}\n`;
+          }
+          if (hasRight) {
+            const parts = [];
+            if (log.warmupWeightRight) parts.push(`Weight: ${log.warmupWeightRight}`);
+            if (log.warmupRepsRight) parts.push(`Reps: ${log.warmupRepsRight}`);
+            body += `   Warmup Right: ${parts.join(", ")}\n`;
+          }
+        }
+      } else if (hasWarmupData) {
         const warmupParts = [];
         if (log.warmupWeight) warmupParts.push(`Weight: ${log.warmupWeight}`);
         if (log.warmupReps) warmupParts.push(`Reps: ${log.warmupReps}`);
         body += `   Warmup: ${warmupParts.join(", ")}\n`;
       }
-      
-      // Shoulder press - special left/right format
+
+      // Shoulder press — left/right working sets
       if (exercise.isShoulderPress && hasShoulderPressData) {
-        // Left arm
         const hasLeftData = log.leftWeight || log.set1RepsLeft || log.set2RepsLeft || log.amrapRepsLeft;
         if (hasLeftData) {
           body += `   LEFT ARM:\n`;
@@ -58,19 +77,12 @@ function formatWorkoutSummary(workoutData: WorkoutData): string {
           if (log.set2RepsLeft) leftSets.push(`Set 2: ${log.set2RepsLeft}`);
           if (log.amrapRepsLeft) leftSets.push(`AMRAP: ${log.amrapRepsLeft}`);
           if (leftSets.length > 0) body += `      ${leftSets.join(" | ")}\n`;
-          
-          // Left arm progression advice
           const leftAmrap = parseInt(log.amrapRepsLeft || "") || 0;
-          if (leftAmrap >= 12) {
-            body += `      → Increase weight next time!\n`;
-          } else if (leftAmrap >= 8) {
-            body += `      → Keep the same weight\n`;
-          } else if (leftAmrap > 0) {
-            body += `      → Reduce weight or adjust variation\n`;
-          }
+          if (leftAmrap >= 12) body += `      Increase weight next time!\n`;
+          else if (leftAmrap >= 8) body += `      Keep the same weight\n`;
+          else if (leftAmrap > 0) body += `      Reduce weight or adjust variation\n`;
         }
-        
-        // Right arm
+
         const hasRightData = log.rightWeight || log.set1RepsRight || log.set2RepsRight || log.amrapRepsRight;
         if (hasRightData) {
           body += `   RIGHT ARM:\n`;
@@ -80,49 +92,33 @@ function formatWorkoutSummary(workoutData: WorkoutData): string {
           if (log.set2RepsRight) rightSets.push(`Set 2: ${log.set2RepsRight}`);
           if (log.amrapRepsRight) rightSets.push(`AMRAP: ${log.amrapRepsRight}`);
           if (rightSets.length > 0) body += `      ${rightSets.join(" | ")}\n`;
-          
-          // Right arm progression advice
           const rightAmrap = parseInt(log.amrapRepsRight || "") || 0;
-          if (rightAmrap >= 12) {
-            body += `      → Increase weight next time!\n`;
-          } else if (rightAmrap >= 8) {
-            body += `      → Keep the same weight\n`;
-          } else if (rightAmrap > 0) {
-            body += `      → Reduce weight or adjust variation\n`;
-          }
+          if (rightAmrap >= 12) body += `      Increase weight next time!\n`;
+          else if (rightAmrap >= 8) body += `      Keep the same weight\n`;
+          else if (rightAmrap > 0) body += `      Reduce weight or adjust variation\n`;
         }
       } else if (hasStandardData) {
-        // Standard exercise format
         if (log.weight) body += `   Weight: ${log.weight}\n`;
-        
         const sets = [];
         if (log.set1Reps) sets.push(`Set 1: ${log.set1Reps}`);
         if (log.set2Reps) sets.push(`Set 2: ${log.set2Reps}`);
         if (log.amrapReps) sets.push(exercise.isFarmersWalk ? `Set 3: ${log.amrapReps}` : `AMRAP: ${log.amrapReps}`);
         if (sets.length > 0) body += `   ${sets.join(" | ")}\n`;
 
-        // Add progression advice
         if (exercise.isFarmersWalk) {
-          // Farmer's Walk uses 40+ total steps logic
           const total1 = parseFarmersWalkSteps(log.set1Reps);
           const total2 = parseFarmersWalkSteps(log.set2Reps);
           const total3 = parseFarmersWalkSteps(log.amrapReps);
-          
           if (total1 >= 40 && total2 >= 40 && total3 >= 40) {
-            body += `   → Increase weight next time!\n`;
+            body += `   Increase weight next time!\n`;
           } else if (total1 > 0 || total2 > 0 || total3 > 0) {
-            body += `   → Keep the same weight until all sets are 40+ steps\n`;
+            body += `   Keep the same weight until all sets are 40+ steps\n`;
           }
         } else {
-          // Standard AMRAP-based progression
           const amrapNum = parseInt(log.amrapReps) || 0;
-          if (amrapNum >= 12) {
-            body += `   → Increase weight next time!\n`;
-          } else if (amrapNum >= 8) {
-            body += `   → Keep the same weight\n`;
-          } else if (amrapNum > 0) {
-            body += `   → Reduce weight or adjust variation\n`;
-          }
+          if (amrapNum >= 12) body += `   Increase weight next time!\n`;
+          else if (amrapNum >= 8) body += `   Keep the same weight\n`;
+          else if (amrapNum > 0) body += `   Reduce weight or adjust variation\n`;
         }
       }
 
@@ -140,14 +136,22 @@ function formatWorkoutSummary(workoutData: WorkoutData): string {
 export default function EmailForm({ workoutData, email, onEmailChange }: EmailFormProps) {
   const [copied, setCopied] = useState(false);
 
-  const hasAnyData = Object.values(workoutData).some(
-    (log) => log.weight || log.set1Reps || log.set2Reps || log.amrapReps ||
-      log.warmupWeight || log.warmupReps ||
-      log.leftWeight || log.rightWeight ||
-      log.set1RepsLeft || log.set1RepsRight ||
-      log.set2RepsLeft || log.set2RepsRight ||
-      log.amrapRepsLeft || log.amrapRepsRight
-  );
+  const hasAnyData = Object.entries(workoutData).some(([id, log]) => {
+    const exercise = exercises.find((e) => e.id === id);
+    if (!exercise) return false;
+    if (exercise.isShoulderPress) {
+      return (
+        log.leftWeight || log.rightWeight ||
+        log.warmupWeightLeft || log.warmupWeightRight ||
+        log.warmupRepsLeft || log.warmupRepsRight ||
+        log.set1RepsLeft || log.set1RepsRight ||
+        log.set2RepsLeft || log.set2RepsRight ||
+        log.amrapRepsLeft || log.amrapRepsRight
+      );
+    }
+    return log.weight || log.set1Reps || log.set2Reps || log.amrapReps ||
+      log.warmupWeight || log.warmupReps;
+  });
 
   const summary = formatWorkoutSummary(workoutData);
 
@@ -156,8 +160,7 @@ export default function EmailForm({ workoutData, email, onEmailChange }: EmailFo
       await navigator.clipboard.writeText(summary);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      // Fallback for older browsers
+    } catch {
       const textarea = document.createElement("textarea");
       textarea.value = summary;
       document.body.appendChild(textarea);
@@ -198,10 +201,10 @@ export default function EmailForm({ workoutData, email, onEmailChange }: EmailFo
           onClick={handleCopy}
           className="px-4 py-2 text-sm font-medium rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
         >
-          {copied ? "✓ Copied!" : "Copy"}
+          {copied ? "Copied!" : "Copy"}
         </button>
       </div>
-      
+
       <textarea
         readOnly
         value={summary}

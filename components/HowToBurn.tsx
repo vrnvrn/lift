@@ -29,11 +29,28 @@ function scrollTo(id: string) {
   }
 }
 
+const CALC_KEY = "lift-calculator";
+
 function MaintenanceCalculator() {
-  const [weight, setWeight] = useState("");
-  const [muscleMass, setMuscleMass] = useState("");
-  const [fatPct, setFatPct] = useState("");
-  const [activityIdx, setActivityIdx] = useState(1);
+  const [weight, setWeight] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(CALC_KEY) || "{}").weight ?? ""; } catch { return ""; }
+  });
+  const [muscleMass, setMuscleMass] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(CALC_KEY) || "{}").muscleMass ?? ""; } catch { return ""; }
+  });
+  const [fatPct, setFatPct] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(CALC_KEY) || "{}").fatPct ?? ""; } catch { return ""; }
+  });
+  const [activityIdx, setActivityIdx] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(CALC_KEY) || "{}").activityIdx ?? 1; } catch { return 1; }
+  });
+
+  function save(updates: object) {
+    try {
+      const prev = JSON.parse(localStorage.getItem(CALC_KEY) || "{}");
+      localStorage.setItem(CALC_KEY, JSON.stringify({ ...prev, ...updates }));
+    } catch {}
+  }
 
   const w = parseFloat(weight);
   const fp = parseFloat(fatPct);
@@ -75,7 +92,7 @@ function MaintenanceCalculator() {
           <input
             type="number"
             value={weight}
-            onChange={(e) => setWeight(e.target.value)}
+            onChange={(e) => { setWeight(e.target.value); save({ weight: e.target.value }); }}
             placeholder="70"
             className={inputClass}
           />
@@ -87,7 +104,7 @@ function MaintenanceCalculator() {
           <input
             type="number"
             value={muscleMass}
-            onChange={(e) => setMuscleMass(e.target.value)}
+            onChange={(e) => { setMuscleMass(e.target.value); save({ muscleMass: e.target.value }); }}
             placeholder="30"
             className={inputClass}
           />
@@ -99,7 +116,7 @@ function MaintenanceCalculator() {
           <input
             type="number"
             value={fatPct}
-            onChange={(e) => setFatPct(e.target.value)}
+            onChange={(e) => { setFatPct(e.target.value); save({ fatPct: e.target.value }); }}
             placeholder="25"
             className={inputClass}
           />
@@ -110,7 +127,7 @@ function MaintenanceCalculator() {
           </label>
           <select
             value={activityIdx}
-            onChange={(e) => setActivityIdx(Number(e.target.value))}
+            onChange={(e) => { setActivityIdx(Number(e.target.value)); save({ activityIdx: Number(e.target.value) }); }}
             className={inputClass}
           >
             {ACTIVITY_LEVELS.map((l, i) => (
@@ -162,13 +179,13 @@ export default function HowToBurn() {
   return (
     <div>
       {/* Sticky TOC */}
-      <div className="sticky top-0 z-10 bg-zinc-100 dark:bg-zinc-950 pt-1 pb-3 -mx-4 px-4">
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+      <div className="sticky top-[60px] z-10 bg-zinc-100 dark:bg-zinc-950 pt-1 pb-3 -mx-4 px-4">
+        <div className="flex flex-wrap gap-2">
           {TOC.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
             >
               {item.label}
             </button>
