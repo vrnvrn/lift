@@ -39,6 +39,22 @@ export default function HowToBurn() {
           </div>
 
           <div>
+            <h3 className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">Muscle raises your metabolism permanently</h3>
+            <p className="text-sm">
+              Muscle is metabolically expensive. Your body burns calories just to maintain it, 24 hours a day, even while you sleep. This is your <strong>basal metabolic rate (BMR)</strong>, and more muscle means a higher one.
+            </p>
+            <p className="text-sm mt-2">
+              CICO (calories in, calories out) is real and non-negotiable for fat loss. But what most people miss is that building muscle raises the "calories out" side of that equation permanently. A more muscular body needs more food just to maintain itself.
+            </p>
+            <p className="text-sm mt-2">
+              This is why the classic approach of eating very little and doing only cardio tends to backfire. You lose weight, but a large portion of it is muscle. Your BMR drops. You have to eat even less to keep losing. The moment you stop, you gain it back fast because your body now burns fewer calories at rest than before you started.
+            </p>
+            <p className="text-sm mt-2">
+              Building muscle and eating enough protein does the opposite: your maintenance calories go up over time, you have more room to eat, and fat loss becomes easier to sustain without suffering.
+            </p>
+          </div>
+
+          <div>
             <h3 className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">Lift heavy and progressively</h3>
             <p className="text-sm">
               Resistance training is what tells your body to hold onto muscle (or build it) while in a deficit. Without it, a calorie deficit just makes you a smaller version of the same shape. <strong>Progressive overload matters here too.</strong>
