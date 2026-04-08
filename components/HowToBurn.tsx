@@ -39,7 +39,7 @@ function MaintenanceCalculator() {
 
   return (
     <div className="bg-blue-50 dark:bg-zinc-800/60 rounded-xl border border-blue-100 dark:border-zinc-700 p-5">
-      <h3 className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">InBody Calculator</h3>
+      <h3 className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">Calories &amp; Protein Calculator</h3>
       <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4">
         Enter the numbers from your InBody printout. Uses the Katch-McArdle formula, which accounts for your lean body mass and is more accurate than height/weight-only formulas.
       </p>
