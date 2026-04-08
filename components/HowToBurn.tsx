@@ -257,6 +257,94 @@ export default function HowToBurn() {
             </ul>
           </div>
 
+          <div>
+            <h3 className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">Nutrition</h3>
+            <p className="text-sm mb-4">
+              Beyond calories and protein, what you eat affects how well you recover, how much inflammation you carry, and how your body composition changes over time.
+            </p>
+
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 mb-1">Anti-inflammatory foods</h4>
+                <p className="text-sm">
+                  Intense training creates inflammation as a normal part of recovery. That is fine and expected. But chronic low-grade inflammation from diet slows recovery, disrupts hormones, and makes it harder to lose fat. Eating anti-inflammatory foods helps your body resolve inflammation faster so you adapt, repair, and improve.
+                </p>
+                <ul className="text-sm mt-2 space-y-1.5 text-zinc-600 dark:text-zinc-400">
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Fatty fish</span>
+                    <span>(salmon, sardines, mackerel) — high in omega-3s, which directly reduce inflammatory markers</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Berries</span>
+                    <span>(blueberries, strawberries, cherries) — rich in antioxidants that reduce oxidative stress from training</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Leafy greens</span>
+                    <span>(spinach, kale, arugula) — magnesium, folate, and polyphenols that support recovery</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Olive oil</span>
+                    <span>— oleocanthal has an ibuprofen-like anti-inflammatory effect; use it as your primary cooking fat</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Turmeric and ginger</span>
+                    <span>— curcumin and gingerol both reduce muscle soreness and inflammation when consumed consistently</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Nuts and seeds</span>
+                    <span>(walnuts, flaxseed, chia) — plant-based omega-3s and vitamin E</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="shrink-0 font-medium text-zinc-700 dark:text-zinc-300">Whole grains and legumes</span>
+                    <span>— fiber feeds gut bacteria that regulate systemic inflammation</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-2">
+                  What drives chronic inflammation: ultra-processed foods, seed oils in large amounts, refined sugar, alcohol, and low sleep. Cutting these matters as much as adding the good stuff.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 mb-1">Supplements worth considering</h4>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-3">
+                  Most supplements are not worth the money. These are the ones with strong evidence and a clear reason to take them if you are lifting consistently.
+                </p>
+                <div className="space-y-3">
+                  <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-3">
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">Creatine monohydrate</p>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      The most researched supplement in sports science. Creatine increases the amount of phosphocreatine stored in your muscles, which fuels short, explosive efforts like lifting. More fuel means more reps at a given weight, which means more stimulus for growth. It also pulls water into muscle cells, which can help with muscle fullness and recovery. Take 3 to 5g daily, any time, consistently. No loading phase needed.
+                    </p>
+                  </div>
+                  <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-3">
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">Magnesium</p>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      Most people are deficient. Magnesium is involved in over 300 enzymatic processes, including muscle contraction, protein synthesis, and sleep quality. Training increases magnesium excretion through sweat. Low magnesium shows up as poor sleep, muscle cramps, fatigue, and slower recovery. Magnesium glycinate or malate are the easiest on the stomach. Take 200 to 400mg in the evening.
+                    </p>
+                  </div>
+                  <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-3">
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">Fish oil (omega-3s)</p>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      If you are not eating fatty fish two or more times a week, an omega-3 supplement fills the gap. EPA and DHA reduce systemic inflammation, support joint health, and have been shown to modestly improve muscle protein synthesis. Aim for 1 to 2g of combined EPA+DHA per day. Look at the label: the total fish oil amount is not the same as the EPA+DHA content.
+                    </p>
+                  </div>
+                  <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-3">
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">Vitamin D3</p>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      Deficiency is extremely common, especially in people who work indoors. Vitamin D supports testosterone levels, bone density, immune function, and mood. If you do not get regular sun exposure on your skin, supplementing 2,000 to 4,000 IU daily is reasonable. Take it with a meal containing fat. Pair with K2 (MK-7) to direct calcium to bones rather than arteries.
+                    </p>
+                  </div>
+                  <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-3">
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">Protein powder (optional)</p>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      Not a supplement in the traditional sense, just a convenient food. Whey is the most complete and fast-absorbing option. Casein is slower and useful before bed. Plant-based blends (pea + rice) are a solid alternative. Use it to hit your protein targets when whole food is inconvenient, not as a replacement for eating real protein sources.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="text-sm text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-700 pt-4">
             <p>
               <strong className="text-zinc-700 dark:text-zinc-300">Bottom line:</strong> High protein, slight deficit, lift heavy, sleep well, walk daily. That is it. Everything else is details.
